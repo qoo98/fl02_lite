@@ -29,7 +29,7 @@ class _ClockTimerState extends State<ClockTimer> {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(
-            height: 200,
+            height: 190,
           ),
           Center(
             child: Text(_timeString,
@@ -39,7 +39,7 @@ class _ClockTimerState extends State<ClockTimer> {
             height: 100,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               if (_isStart)
                 SizedBox(
@@ -189,65 +189,6 @@ class _ClockTimerState extends State<ClockTimer> {
           Divider(
             color: Colors.white,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Icon(Icons.ac_unit),
-                    Text(
-                      "世界時計",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Icon(Icons.access_alarm),
-                    Text(
-                      "アラーム",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  color: Color.fromRGBO(219, 150, 20, 0.42745098039215684),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.watch_later,
-                        color: Colors.amber,
-                      ),
-                      Text(
-                        "ストップウォッチ",
-                        style: TextStyle(fontSize: 10, color: Colors.amber),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Icon(Icons.access_time_outlined),
-                    Text(
-                      "タイマー",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          )
         ],
       ),
     );
@@ -277,11 +218,11 @@ class _ClockTimerState extends State<ClockTimer> {
     var mod = diff % (60 * 60);
     var minutes = (mod / 60).floor();
     var second = mod % 60;
-    var millisecond = (milli % 1000).toString().substring(0, 2);
+    var millisecond = ((milli % 1000) / 10).floor();
 
     setState(() => {
           _timeString =
-              """${_convertTwoDigits(minutes)}:${_convertTwoDigits(second)}.${millisecond}"""
+              """${_convertTwoDigits(minutes)}:${_convertTwoDigits(second)}.${_convertTwoDigits(millisecond) }"""
         });
   }
 
